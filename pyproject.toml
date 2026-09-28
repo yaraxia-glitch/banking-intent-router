@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "banking-intent-router"
+version = "0.1.0"
+description = "Reproducible baselines for risk-aware banking support query routing"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "scikit-learn>=1.5,<2.0",
+]
+
+[project.scripts]
+banking-router = "banking_router.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.unittest]
+start-directory = "tests"
+

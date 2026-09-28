@@ -1,0 +1,105 @@
+# Risk Aware Banking Query Routing
+
+This repository evaluates small, reproducible systems that route short online-banking support queries to one of three service queues. The local experiment compares a majority-queue sanity check, a deterministic keyword baseline, and a TF-IDF logistic-regression classifier. A later increment will add a rented foundation-model classifier and a review-budgeted hybrid policy.
+
+## Project question
+
+Can a hybrid router keep harmful wrong-queue assignments at or below 5% of all test queries while sending no more than 10% of queries to human review?
+
+The prototype does not answer customers, execute transactions, infer fraud, or process live personal data.
+
+## Dataset
+
+The project uses the public [BANKING77 dataset](https://github.com/PolyAI-LDN/task-specific-datasets/tree/master/banking_data), which contains 13,083 English customer-service queries across 77 intents. The source repository is licensed under CC BY 4.0.
+
+The preparation command selects 12 intents and produces a deterministic 540-query subset with seed `6201`:
+
+- 240 training queries: 20 per intent from the official training split
+- 60 validation queries: 5 per intent from the official training split
+- 240 test queries: 20 per intent from the official test split
+
+The official test examples remain separate from threshold selection and model selection.
+
+## Queue taxonomy
+
+| Queue | BANKING77 intents |
+| --- | --- |
+| Disputes and corrections | `card_payment_not_recognised`, `cash_withdrawal_not_recognised`, `direct_debit_payment_not_recognised`, `transaction_charged_twice` |
+| Failed and pending transactions | `declined_card_payment`, `pending_card_payment`, `failed_transfer`, `pending_transfer` |
+| Fees and pricing | `card_payment_fee_charged`, `cash_withdrawal_charge`, `exchange_charge`, `transfer_fee_charged` |
+
+The single source of truth for this mapping is `src/banking_router/taxonomy.py`.
+
+## Setup
+
+Create and activate a virtual environment, then install the project:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e .
+```
+
+On macOS or Linux, activate the environment with `source .venv/bin/activate`.
+
+## Run the local experiment
+
+Download the official CSV files and create the fixed subset:
+
+```powershell
+banking-router prepare-data
+```
+
+Train and evaluate all local baselines:
+
+```powershell
+banking-router evaluate-local
+```
+
+This writes:
+
+- `data/processed/train.csv`
+- `data/processed/validation.csv`
+- `data/processed/test.csv`
+- `data/processed/manifest.json`
+- `artifacts/tfidf_logistic.joblib`
+- `results/local_metrics.json`
+- `results/local_predictions.csv`
+
+## Local baseline results
+
+The protocol and model settings were fixed before the test run. The 240-query test split is balanced across the three queues and is not used for further feature, keyword, or hyperparameter changes.
+
+| System | Validation queue accuracy | Test queue accuracy | Test harmful wrong-queue rate | Test intent accuracy |
+| --- | ---: | ---: | ---: | ---: |
+| Majority queue | 33.3% | 33.3% | 66.7% | Not applicable |
+| Keyword rules | 70.0% | 74.2% | 25.8% | Not applicable |
+| TF-IDF logistic regression | 90.0% | 95.0% | 5.0% | 89.2% |
+
+All three local systems route every query and therefore have a 0% review rate at this stage. The detailed interpretation and main error examples are recorded in `docs/local_baseline_results.md`.
+
+Run the automated tests:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+## Reproducibility controls
+
+- Dataset sampling uses seed `6201` and sorted source rows.
+- The source file hashes and generated split hashes are stored in `manifest.json`.
+- The intent-to-queue map is version controlled and unit tested.
+- The same processed test file is used for every model.
+- Generated datasets, trained artifacts, API secrets, and experiment outputs are excluded from Git.
+
+## Current limitations
+
+- BANKING77 is a research dataset, not live operational bank traffic.
+- The three queues are a project-specific aggregation of 12 fine-grained intents.
+- The keyword baseline is deliberately simple and is not a production rule engine.
+- Local baseline results do not establish the foundation-model or hybrid trade-off; those systems are added in the next increment.
+
+## Citation
+
+Casanueva, I., Temcinas, T., Gerz, D., Henderson, M., and Vulic, I. (2020). Efficient Intent Detection with Dual Sentence Encoders. Proceedings of the 2nd Workshop on NLP for Conversational AI. [Paper](https://arxiv.org/abs/2003.04807).
