@@ -10,7 +10,7 @@ The local baseline design, 12-intent taxonomy, queue mapping, sample counts, ran
 | --- | --- | ---: | ---: | ---: | ---: |
 | Validation, 60 queries | Majority queue | 33.3% | 66.7% | Not applicable | 0.0% |
 | Validation, 60 queries | Keyword rules | 70.0% | 30.0% | Not applicable | 0.0% |
-| Validation, 60 queries | TF-IDF logistic regression | 90.0% | 10.0% | 83.3% | 0.0% |
+| Validation, 60 queries | TF-IDF logistic regression | 88.3% | 11.7% | 83.3% | 0.0% |
 | Test, 240 queries | Majority queue | 33.3% | 66.7% | Not applicable | 0.0% |
 | Test, 240 queries | Keyword rules | 74.2% | 25.8% | Not applicable | 0.0% |
 | Test, 240 queries | TF-IDF logistic regression | 95.0% | 5.0% | 89.2% | 0.0% |
@@ -39,10 +39,9 @@ These examples show why surface words such as "transfer," "charged," "cash," and
 Run the following commands from the repository root:
 
 ```powershell
-banking-router prepare-data
+python scripts/prepare_banking77.py
 banking-router evaluate-local
 python -m unittest discover -s tests -v
 ```
 
 The generated `manifest.json` records the source and split SHA-256 hashes. Detailed predictions and metrics are written to the ignored `results` directory so each evaluator can reproduce them locally.
-

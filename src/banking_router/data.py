@@ -13,11 +13,13 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
 
+from banking_router.cleaning import CleanedRow, clean_dataset_files
 from banking_router.taxonomy import SELECTED_INTENTS, queue_for_intent, validate_taxonomy
 
 
 TRAIN_URL = "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/master/banking_data/train.csv"
 TEST_URL = "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/master/banking_data/test.csv"
+CATEGORIES_URL = "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/master/banking_data/categories.json"
 DEFAULT_SEED = 6201
 
 
@@ -59,24 +61,17 @@ def download_file(url: str, destination: Path, force: bool = False) -> Path:
     return destination
 
 
-def read_source_csv(path: Path, source_split: str) -> list[DatasetRow]:
-    rows: list[DatasetRow] = []
-    with path.open("r", encoding="utf-8", newline="") as stream:
-        reader = csv.DictReader(stream)
-        if reader.fieldnames != ["text", "category"]:
-            raise ValueError(f"Unexpected BANKING77 columns in {path}: {reader.fieldnames}")
-        for record in reader:
-            intent = record["category"].strip()
-            if intent in SELECTED_INTENTS:
-                rows.append(
-                    DatasetRow(
-                        text=record["text"].strip(),
-                        intent=intent,
-                        queue=queue_for_intent(intent),
-                        source_split=source_split,
-                    )
-                )
-    return rows
+def selected_dataset_rows(rows: Sequence[CleanedRow]) -> list[DatasetRow]:
+    return [
+        DatasetRow(
+            text=row.text,
+            intent=row.category,
+            queue=queue_for_intent(row.category),
+            source_split=row.source_split,
+        )
+        for row in rows
+        if row.category in SELECTED_INTENTS
+    ]
 
 
 def _sample_per_intent(
@@ -157,14 +152,28 @@ def _split_counts(rows: Sequence[DatasetRow]) -> dict[str, object]:
 
 def prepare_dataset(
     raw_dir: Path,
+    cleaned_dir: Path,
     processed_dir: Path,
+    cleaning_report_path: Path,
     seed: int = DEFAULT_SEED,
     force_download: bool = False,
 ) -> dict[str, object]:
     train_path = download_file(TRAIN_URL, raw_dir / "banking77_train.csv", force_download)
     test_path = download_file(TEST_URL, raw_dir / "banking77_test.csv", force_download)
-    train_rows = read_source_csv(train_path, "official_train")
-    test_rows = read_source_csv(test_path, "official_test")
+    categories_path = download_file(
+        CATEGORIES_URL,
+        raw_dir / "banking77_categories.json",
+        force_download,
+    )
+    cleaned, cleaning_report = clean_dataset_files(
+        train_path=train_path,
+        test_path=test_path,
+        categories_path=categories_path,
+        cleaned_dir=cleaned_dir,
+        report_markdown_path=cleaning_report_path,
+    )
+    train_rows = selected_dataset_rows(cleaned["train"])
+    test_rows = selected_dataset_rows(cleaned["test"])
     splits = build_splits(train_rows, test_rows, seed)
 
     output_paths: dict[str, Path] = {}
@@ -182,7 +191,12 @@ def prepare_dataset(
         "source_files": {
             "train": {"path": str(train_path), "sha256": sha256_file(train_path)},
             "test": {"path": str(test_path), "sha256": sha256_file(test_path)},
+            "categories": {
+                "path": str(categories_path),
+                "sha256": sha256_file(categories_path),
+            },
         },
+        "cleaning": cleaning_report,
         "splits": {
             name: {
                 **_split_counts(rows),
@@ -196,4 +210,3 @@ def prepare_dataset(
     manifest_path = processed_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return manifest
-

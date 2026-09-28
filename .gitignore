@@ -8,6 +8,9 @@ __pycache__/
 htmlcov/
 
 data/raw/*.csv
+data/raw/*.json
+data/cleaned/*.csv
+data/cleaned/*.json
 data/processed/*.csv
 data/processed/manifest.json
 artifacts/*.joblib
@@ -15,4 +18,3 @@ results/*.csv
 results/*.json
 
 !.gitkeep
-

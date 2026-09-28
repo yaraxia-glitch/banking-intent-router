@@ -45,9 +45,17 @@ On macOS or Linux, activate the environment with `source .venv/bin/activate`.
 
 ## Run the local experiment
 
-Download the official CSV files and create the fixed subset:
+Download the untouched official files, run the cleaning audit, and create the fixed subset:
 
 ```powershell
+python scripts/prepare_banking77.py
+```
+
+The same workflow can be run as three inspectable stages:
+
+```powershell
+banking-router download-data
+banking-router clean-data
 banking-router prepare-data
 ```
 
@@ -63,6 +71,11 @@ This writes:
 - `data/processed/validation.csv`
 - `data/processed/test.csv`
 - `data/processed/manifest.json`
+- `data/cleaned/banking77_train_cleaned.csv`
+- `data/cleaned/banking77_test_cleaned.csv`
+- `data/cleaned/quarantine.csv`
+- `data/cleaned/cleaning_report.json`
+- `docs/data_cleaning_report.md`
 - `artifacts/tfidf_logistic.joblib`
 - `results/local_metrics.json`
 - `results/local_predictions.csv`
@@ -75,7 +88,7 @@ The protocol and model settings were fixed before the test run. The 240-query te
 | --- | ---: | ---: | ---: | ---: |
 | Majority queue | 33.3% | 33.3% | 66.7% | Not applicable |
 | Keyword rules | 70.0% | 74.2% | 25.8% | Not applicable |
-| TF-IDF logistic regression | 90.0% | 95.0% | 5.0% | 89.2% |
+| TF-IDF logistic regression | 88.3% | 95.0% | 5.0% | 89.2% |
 
 All three local systems route every query and therefore have a 0% review rate at this stage. The detailed interpretation and main error examples are recorded in `docs/local_baseline_results.md`.
 
@@ -88,6 +101,9 @@ python -m unittest discover -s tests -v
 ## Reproducibility controls
 
 - Dataset sampling uses seed `6201` and sorted source rows.
+- Original source files remain unchanged and are hashed with SHA-256.
+- Cleaning applies Unicode NFKC and whitespace normalisation, label validation, duplicate removal, train-test leakage prevention, and a documented PII-pattern scan.
+- Every removed row is retained in `quarantine.csv` with its source row number and reason.
 - The source file hashes and generated split hashes are stored in `manifest.json`.
 - The intent-to-queue map is version controlled and unit tested.
 - The same processed test file is used for every model.
