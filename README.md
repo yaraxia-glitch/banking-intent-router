@@ -1,6 +1,6 @@
 # Risk Aware Banking Query Routing
 
-This repository evaluates small, reproducible systems that route short online-banking support queries to one of three service queues. The local experiment compares a majority-queue sanity check, a deterministic keyword baseline, and a TF-IDF logistic-regression classifier. A later increment will add a rented foundation-model classifier and a review-budgeted hybrid policy.
+This repository evaluates small, reproducible systems that route short online-banking support queries to one of three service queues. It compares a majority-queue sanity check, a deterministic keyword baseline, a TF-IDF logistic-regression classifier, GPT-6 Luna, and a review-budgeted hybrid policy.
 
 ## Project question
 
@@ -39,6 +39,12 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -e .
+```
+
+Install the optional OpenAI SDK only for the rented-model experiment:
+
+```powershell
+python -m pip install -e ".[openai]"
 ```
 
 On macOS or Linux, activate the environment with `source .venv/bin/activate`.
@@ -98,6 +104,20 @@ Run the automated tests:
 python -m unittest discover -s tests -v
 ```
 
+## Run the rented-model and hybrid experiment
+
+Set `OPENAI_API_KEY` in your local environment; do not put it in a source file or commit it. Then run the stages in order:
+
+```powershell
+banking-router evaluate-luna-validation
+banking-router select-hybrid-policy
+banking-router evaluate-final
+```
+
+The first command sends only the 60 validation queries to GPT-6 Luna. The second command selects thresholds using validation only and freezes them in `artifacts/hybrid_policy.json`. The final command evaluates that frozen policy on the 240-query test subset and calls Luna only for low-confidence local predictions. API responses are cached incrementally in ignored JSONL files, so an interrupted run can resume.
+
+No synthetic examples are used at any stage. GPT-6 Luna only classifies cleaned queries originating in the official BANKING77 files. The model and policy design is documented in `docs/model_design.md`.
+
 ## Reproducibility controls
 
 - Dataset sampling uses seed `6201` and sorted source rows.
@@ -114,7 +134,7 @@ python -m unittest discover -s tests -v
 - BANKING77 is a research dataset, not live operational bank traffic.
 - The three queues are a project-specific aggregation of 12 fine-grained intents.
 - The keyword baseline is deliberately simple and is not a production rule engine.
-- Local baseline results do not establish the foundation-model or hybrid trade-off; those systems are added in the next increment.
+- GPT-6 Luna and hybrid results remain unreported until the API experiment is run with a user-owned key; the repository never fabricates missing results.
 
 ## Citation
 

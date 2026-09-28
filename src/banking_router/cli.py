@@ -16,6 +16,12 @@ from banking_router.data import (
     prepare_dataset,
 )
 from banking_router.evaluation import run_local_evaluation
+from banking_router.experiments import (
+    run_final_test,
+    run_luna_validation,
+    select_hybrid_policy,
+)
+from banking_router.llm import DEFAULT_MODEL
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -60,6 +66,31 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--artifacts-dir", type=Path, default=Path("artifacts"))
     evaluate.add_argument("--results-dir", type=Path, default=Path("results"))
     evaluate.add_argument("--seed", type=int, default=DEFAULT_SEED)
+
+    luna = subparsers.add_parser(
+        "evaluate-luna-validation",
+        help="Run GPT-6 Luna on validation data and cache every response",
+    )
+    luna.add_argument("--data-dir", type=Path, default=Path("data/processed"))
+    luna.add_argument("--results-dir", type=Path, default=Path("results"))
+    luna.add_argument("--model", default=DEFAULT_MODEL)
+
+    select = subparsers.add_parser(
+        "select-hybrid-policy",
+        help="Choose and freeze hybrid thresholds using validation only",
+    )
+    select.add_argument("--data-dir", type=Path, default=Path("data/processed"))
+    select.add_argument("--results-dir", type=Path, default=Path("results"))
+    select.add_argument("--artifacts-dir", type=Path, default=Path("artifacts"))
+
+    final = subparsers.add_parser(
+        "evaluate-final",
+        help="Evaluate the frozen hybrid policy once on the held-out test split",
+    )
+    final.add_argument("--data-dir", type=Path, default=Path("data/processed"))
+    final.add_argument("--results-dir", type=Path, default=Path("results"))
+    final.add_argument("--artifacts-dir", type=Path, default=Path("artifacts"))
+    final.add_argument("--model", default=DEFAULT_MODEL)
     return parser
 
 
@@ -110,6 +141,28 @@ def main() -> None:
             artifacts_dir=args.artifacts_dir,
             results_dir=args.results_dir,
             seed=args.seed,
+        )
+        print(json.dumps(metrics, indent=2))
+    elif args.command == "evaluate-luna-validation":
+        metrics = run_luna_validation(
+            data_dir=args.data_dir,
+            results_dir=args.results_dir,
+            model=args.model,
+        )
+        print(json.dumps(metrics, indent=2))
+    elif args.command == "select-hybrid-policy":
+        policy, metrics = select_hybrid_policy(
+            data_dir=args.data_dir,
+            results_dir=args.results_dir,
+            artifacts_dir=args.artifacts_dir,
+        )
+        print(json.dumps({"policy": policy.__dict__, "metrics": metrics}, indent=2))
+    elif args.command == "evaluate-final":
+        metrics = run_final_test(
+            data_dir=args.data_dir,
+            results_dir=args.results_dir,
+            artifacts_dir=args.artifacts_dir,
+            model=args.model,
         )
         print(json.dumps(metrics, indent=2))
 

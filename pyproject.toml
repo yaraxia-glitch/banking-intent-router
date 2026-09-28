@@ -12,6 +12,11 @@ dependencies = [
   "scikit-learn>=1.5,<2.0",
 ]
 
+[project.optional-dependencies]
+openai = [
+  "openai>=2.0,<3.0",
+]
+
 [project.scripts]
 banking-router = "banking_router.cli:main"
 
@@ -23,4 +28,3 @@ where = ["src"]
 
 [tool.unittest]
 start-directory = "tests"
-
