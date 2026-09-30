@@ -115,6 +115,14 @@ Run the automated tests:
 python -m unittest discover -s tests -v
 ```
 
+Run the read-only end-to-end verification after the experiment outputs exist:
+
+```powershell
+python scripts/verify_project.py
+```
+
+This checks source and generated-file hashes, row counts, split isolation, API-cache counts, the frozen validation policy, final constraints, absence of embedded API keys, and the complete automated test suite. It does not make API calls or spend credit.
+
 ## Run the rented-model and hybrid experiment
 
 Set the university-provided OpenRouter key as `OPENROUTER_API_KEY` in your local environment; do not put it in a source file or commit it. For compatibility, the code also accepts an existing `OPENAI_API_KEY` variable and still sends it only to OpenRouter. Then run the stages in order:
