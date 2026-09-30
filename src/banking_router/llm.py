@@ -1,15 +1,17 @@
-"""GPT-6 Luna routing with strict structured output and no synthetic examples."""
+"""GPT-6 Luna routing through OpenRouter with strict structured output."""
 
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import asdict, dataclass
 from typing import Any, Final
 
 from banking_router.taxonomy import SELECTED_INTENTS, queue_for_intent
 
 
-DEFAULT_MODEL: Final[str] = "gpt-6-luna"
+DEFAULT_MODEL: Final[str] = "openai/gpt-6-luna"
+OPENROUTER_BASE_URL: Final[str] = "https://openrouter.ai/api/v1"
 UNKNOWN_INTENT: Final[str] = "unknown"
 
 INTENT_DESCRIPTIONS: Final[dict[str, str]] = {
@@ -99,11 +101,12 @@ account status, or facts that the customer did not state. Confidence is a number
 not answer the customer."""
 
 
-class OpenAILunaRouter:
-    """Thin adapter around the OpenAI Responses API.
+class OpenRouterLunaRouter:
+    """Thin adapter around OpenRouter's OpenAI-compatible API.
 
-    A client can be injected for unit tests. ``from_environment`` uses the official
-    SDK and reads ``OPENAI_API_KEY`` through the SDK's normal environment handling.
+    A client can be injected for unit tests. ``from_environment`` prefers
+    ``OPENROUTER_API_KEY`` and falls back to ``OPENAI_API_KEY`` so an already-set
+    university-provided key continues to work without being written to disk.
     """
 
     def __init__(self, client: Any, model: str = DEFAULT_MODEL) -> None:
@@ -111,40 +114,55 @@ class OpenAILunaRouter:
         self.model = model
 
     @classmethod
-    def from_environment(cls, model: str = DEFAULT_MODEL) -> "OpenAILunaRouter":
+    def from_environment(cls, model: str = DEFAULT_MODEL) -> "OpenRouterLunaRouter":
         try:
             from openai import OpenAI
         except ImportError as exc:
             raise RuntimeError(
                 "Install the API extra first: python -m pip install -e '.[openai]'"
             ) from exc
-        return cls(OpenAI(), model=model)
+        api_key = os.getenv("OPENROUTER_API_KEY") or os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise RuntimeError(
+                "Set OPENROUTER_API_KEY (preferred) or OPENAI_API_KEY before running"
+            )
+        client = OpenAI(
+            base_url=OPENROUTER_BASE_URL,
+            api_key=api_key,
+            default_headers={"X-OpenRouter-Title": "PE6201 Banking Intent Router"},
+        )
+        return cls(client, model=model)
 
     def route(self, text: str) -> LLMRoute:
         if not text.strip():
             raise ValueError("A non-empty query is required")
-        response = self.client.responses.create(
+        response = self.client.chat.completions.create(
             model=self.model,
-            reasoning={"effort": "low"},
-            store=False,
-            input=[
+            messages=[
                 {"role": "system", "content": system_prompt()},
                 {"role": "user", "content": text},
             ],
-            text={
-                "format": {
-                    "type": "json_schema",
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
                     "name": "banking_route",
                     "strict": True,
                     "schema": _response_schema(),
                 }
             },
-            max_output_tokens=200,
+            max_tokens=200,
+            extra_body={
+                "reasoning": {"effort": "low"},
+                "provider": {"require_parameters": True},
+            },
         )
         try:
-            payload = json.loads(response.output_text)
-        except (AttributeError, TypeError, json.JSONDecodeError) as exc:
-            raise RuntimeError("The API did not return a valid structured route") from exc
+            message = response.choices[0].message
+            if getattr(message, "refusal", None):
+                raise RuntimeError("The model refused the routing request")
+            payload = json.loads(message.content)
+        except (AttributeError, IndexError, TypeError, json.JSONDecodeError) as exc:
+            raise RuntimeError("OpenRouter did not return a valid structured route") from exc
 
         decision = str(payload.get("decision", ""))
         intent = str(payload.get("intent", ""))
@@ -167,6 +185,6 @@ class OpenAILunaRouter:
             reason=reason,
             model=self.model,
             response_id=str(getattr(response, "id", "")),
-            input_tokens=int(getattr(usage, "input_tokens", 0) or 0),
-            output_tokens=int(getattr(usage, "output_tokens", 0) or 0),
+            input_tokens=int(getattr(usage, "prompt_tokens", 0) or 0),
+            output_tokens=int(getattr(usage, "completion_tokens", 0) or 0),
         )

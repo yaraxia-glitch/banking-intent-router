@@ -1,0 +1,40 @@
+{
+  "policy": {
+    "local_confidence_threshold": 0.15785826849376272,
+    "llm_confidence_threshold": 0.0,
+    "review_on_queue_disagreement": true,
+    "selected_on": "validation",
+    "target_harmful_wrong_queue_rate": 0.05,
+    "maximum_review_rate": 0.1
+  },
+  "selection_metrics": {
+    "rows": 60,
+    "review_count": 4,
+    "review_rate": 0.06666666666666667,
+    "automatic_coverage": 0.9333333333333333,
+    "harmful_wrong_queue_count": 3,
+    "harmful_wrong_queue_rate": 0.05,
+    "selective_queue_accuracy": 0.9464285714285714,
+    "raw_queue_accuracy_without_review": 0.9,
+    "queue_confusion": {
+      "disputes_and_corrections": {
+        "REVIEW": 3,
+        "disputes_and_corrections": 16,
+        "fees_and_pricing": 1
+      },
+      "failed_and_pending_transactions": {
+        "disputes_and_corrections": 1,
+        "failed_and_pending_transactions": 19
+      },
+      "fees_and_pricing": {
+        "REVIEW": 1,
+        "failed_and_pending_transactions": 1,
+        "fees_and_pricing": 18
+      }
+    },
+    "intent_accuracy": 0.85,
+    "api_call_count": 4,
+    "api_call_rate": 0.06666666666666667,
+    "constraints_met": true
+  }
+}

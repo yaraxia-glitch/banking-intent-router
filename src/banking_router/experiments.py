@@ -13,11 +13,11 @@ from banking_router.baselines import TfidfIntentRouter
 from banking_router.data import DatasetRow, load_split
 from banking_router.evaluation import calculate_metrics
 from banking_router.hybrid import HybridPolicy, evaluate_policy, select_policy
-from banking_router.llm import DEFAULT_MODEL, LLMRoute, OpenAILunaRouter
+from banking_router.llm import DEFAULT_MODEL, LLMRoute, OpenRouterLunaRouter
 
 
-# Standard short-context rates shown on the official GPT-6 Luna model page on
-# 2026-09-28. They are used only for transparent experiment cost estimates.
+# Rates shown on the OpenRouter GPT-6 Luna model page on 2026-09-30. They are
+# used only for transparent experiment cost estimates.
 LUNA_INPUT_USD_PER_MILLION = 0.10
 LUNA_OUTPUT_USD_PER_MILLION = 0.50
 
@@ -73,7 +73,7 @@ def _append_cache_record(
 def collect_llm_routes(
     rows: Sequence[DatasetRow],
     cache_path: Path,
-    router: OpenAILunaRouter,
+    router: OpenRouterLunaRouter,
     only_keys: set[str] | None = None,
 ) -> dict[str, LLMRoute]:
     """Collect missing API predictions and append each result immediately."""
@@ -105,12 +105,12 @@ def run_luna_validation(
     data_dir: Path,
     results_dir: Path,
     model: str = DEFAULT_MODEL,
-    router: OpenAILunaRouter | None = None,
+    router: OpenRouterLunaRouter | None = None,
 ) -> dict[str, object]:
     """Run Luna on validation only; never touches the held-out test split."""
 
     rows = load_split(data_dir / "validation.csv")
-    active_router = router or OpenAILunaRouter.from_environment(model=model)
+    active_router = router or OpenRouterLunaRouter.from_environment(model=model)
     cache_path = results_dir / "luna_validation.jsonl"
     routes = collect_llm_routes(rows, cache_path, active_router)
     ordered = [routes[row_key(row.text)] for row in rows]
@@ -127,7 +127,8 @@ def run_luna_validation(
             "input_tokens": sum(route.input_tokens for route in ordered),
             "output_tokens": sum(route.output_tokens for route in ordered),
             "estimated_standard_cost_usd": estimate_cost_usd(ordered),
-            "pricing_as_of": "2026-09-28",
+            "pricing_as_of": "2026-09-30",
+            "gateway": "openrouter",
         }
     )
     results_dir.mkdir(parents=True, exist_ok=True)
@@ -203,7 +204,7 @@ def run_final_test(
     results_dir: Path,
     artifacts_dir: Path,
     model: str = DEFAULT_MODEL,
-    router: OpenAILunaRouter | None = None,
+    router: OpenRouterLunaRouter | None = None,
 ) -> dict[str, object]:
     """Evaluate the already-frozen policy once on the official held-out test subset."""
 
@@ -232,7 +233,7 @@ def run_final_test(
     }
     missing = required_keys.difference(cached)
     if missing:
-        active_router = router or OpenAILunaRouter.from_environment(model=model)
+        active_router = router or OpenRouterLunaRouter.from_environment(model=model)
         cached = collect_llm_routes(
             rows,
             cache_path,
@@ -256,7 +257,8 @@ def run_final_test(
             "input_tokens": sum(route.input_tokens for route in called_routes),
             "output_tokens": sum(route.output_tokens for route in called_routes),
             "estimated_standard_cost_usd": estimate_cost_usd(called_routes),
-            "pricing_as_of": "2026-09-28",
+            "pricing_as_of": "2026-09-30",
+            "gateway": "openrouter",
             "policy_path": str(policy_path),
         }
     )

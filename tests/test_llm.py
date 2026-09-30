@@ -2,7 +2,7 @@ import json
 import unittest
 from types import SimpleNamespace
 
-from banking_router.llm import OpenAILunaRouter
+from banking_router.llm import OpenRouterLunaRouter
 
 
 class FakeResponses:
@@ -14,9 +14,21 @@ class FakeResponses:
         self.last_request = kwargs
         return SimpleNamespace(
             id="resp_test",
-            output_text=json.dumps(self.payload),
-            usage=SimpleNamespace(input_tokens=123, output_tokens=17),
+            choices=[
+                SimpleNamespace(
+                    message=SimpleNamespace(
+                        content=json.dumps(self.payload),
+                        refusal=None,
+                    )
+                )
+            ],
+            usage=SimpleNamespace(prompt_tokens=123, completion_tokens=17),
         )
+
+
+class FakeChat:
+    def __init__(self, responses):
+        self.completions = responses
 
 
 class LunaRouterTests(unittest.TestCase):
@@ -29,15 +41,14 @@ class LunaRouterTests(unittest.TestCase):
                 "reason": "The transfer is explicitly pending.",
             }
         )
-        router = OpenAILunaRouter(SimpleNamespace(responses=responses))
+        router = OpenRouterLunaRouter(SimpleNamespace(chat=FakeChat(responses)))
         result = router.route("Why is my transfer still pending?")
 
         self.assertEqual("failed_and_pending_transactions", result.queue)
         self.assertFalse(result.reviewed)
         self.assertEqual(123, result.input_tokens)
-        self.assertEqual("gpt-6-luna", responses.last_request["model"])
-        self.assertFalse(responses.last_request["store"])
-        schema = responses.last_request["text"]["format"]
+        self.assertEqual("openai/gpt-6-luna", responses.last_request["model"])
+        schema = responses.last_request["response_format"]["json_schema"]
         self.assertTrue(schema["strict"])
 
     def test_unknown_route_must_be_reviewed(self):
@@ -49,7 +60,7 @@ class LunaRouterTests(unittest.TestCase):
                 "reason": "Unclear.",
             }
         )
-        router = OpenAILunaRouter(SimpleNamespace(responses=responses))
+        router = OpenRouterLunaRouter(SimpleNamespace(chat=FakeChat(responses)))
         with self.assertRaises(RuntimeError):
             router.route("hello")
 

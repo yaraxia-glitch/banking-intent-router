@@ -6,15 +6,15 @@ The rented model classifies the same cleaned, human-authored BANKING77 queries u
 
 ## Rented model
 
-The implementation uses `gpt-6-luna` through the OpenAI Responses API with low reasoning effort and a strict JSON schema. The model must return a route/review decision, one of the 12 fixed intents or `unknown`, a confidence score, and a short reason. The service queue is derived in local code from the version-controlled taxonomy rather than trusted as a free-form model output.
+The implementation uses `openai/gpt-6-luna` through the university-provided OpenRouter credit and OpenRouter's OpenAI-compatible Chat Completions endpoint. It requests low reasoning effort and a strict JSON schema. The model must return a route/review decision, one of the 12 fixed intents or `unknown`, a confidence score, and a short reason. The service queue is derived in local code from the version-controlled taxonomy rather than trusted as a free-form model output.
 
-OpenAI describes GPT-6 Luna as its efficient model for focused, high-volume tasks. The official model page lists Structured Outputs and the Responses API as supported. Standard short-context pricing checked on 28 September 2026 was $0.10 per million input tokens and $0.50 per million output tokens. Pricing is dated in the result files because it can change.
+OpenRouter lists GPT-6 Luna as suitable for high-volume classification and shows support for structured outputs. Pricing checked on 30 September 2026 was $0.10 per million input tokens and $0.50 per million output tokens. Pricing is dated in the result files because it can change. The API request sets `provider.require_parameters=true` so OpenRouter routes only to endpoints that support the required JSON schema.
 
 Official sources:
 
-- https://developers.openai.com/api/docs/models/gpt-6-luna
-- https://developers.openai.com/api/docs/guides/structured-outputs
-- https://developers.openai.com/api/docs/pricing
+- https://openrouter.ai/docs/quickstart
+- https://openrouter.ai/docs/guides/features/structured-outputs
+- https://openrouter.ai/openai/gpt-6-luna
 
 ## Hybrid policy and test discipline
 
@@ -30,7 +30,7 @@ When the local and Luna queue predictions disagree below the local threshold, th
 ## Reproducibility and privacy controls
 
 - API results are appended to JSONL after each call, so interrupted runs resume without paying for completed rows again.
-- API keys are read by the official SDK from `OPENAI_API_KEY` and are never stored in the repository.
+- The university-provided key is read from `OPENROUTER_API_KEY`, with `OPENAI_API_KEY` accepted only as a compatibility fallback. The key is never stored in the repository.
 - Generated result caches, trained artifacts, and secrets are excluded from Git.
 - Token counts and a dated cost estimate are written to the metrics files.
 - The final test command refuses to run until a validation-selected policy exists.

@@ -41,7 +41,7 @@ python -m pip install --upgrade pip
 python -m pip install -e .
 ```
 
-Install the optional OpenAI SDK only for the rented-model experiment:
+Install the optional OpenAI SDK only for the rented-model experiment. The SDK is configured to use OpenRouter's OpenAI-compatible endpoint:
 
 ```powershell
 python -m pip install -e ".[openai]"
@@ -98,6 +98,17 @@ The protocol and model settings were fixed before the test run. The 240-query te
 
 All three local systems route every query and therefore have a 0% review rate at this stage. The detailed interpretation and main error examples are recorded in `docs/local_baseline_results.md`.
 
+## Final hybrid result
+
+The GPT-6 Luna experiment was run through OpenRouter using the university-provided credit. Thresholds were selected on validation and frozen before the final test run.
+
+| System | Test harmful wrong-queue rate | Test review rate | Automatic coverage | OpenRouter call rate |
+| --- | ---: | ---: | ---: | ---: |
+| TF-IDF logistic regression | 5.0% | 0.0% | 100.0% | 0.0% |
+| Frozen TF-IDF + GPT-6 Luna hybrid | **4.17%** | **3.33%** | **96.67%** | **3.75%** |
+
+The hybrid met the project constraints of no more than 5% harmful wrong-queue assignments and no more than 10% human review. The full protocol, validation result, held-out test result, cost, and limitations are documented in `docs/openrouter_hybrid_results.md`.
+
 Run the automated tests:
 
 ```powershell
@@ -106,7 +117,7 @@ python -m unittest discover -s tests -v
 
 ## Run the rented-model and hybrid experiment
 
-Set `OPENAI_API_KEY` in your local environment; do not put it in a source file or commit it. Then run the stages in order:
+Set the university-provided OpenRouter key as `OPENROUTER_API_KEY` in your local environment; do not put it in a source file or commit it. For compatibility, the code also accepts an existing `OPENAI_API_KEY` variable and still sends it only to OpenRouter. Then run the stages in order:
 
 ```powershell
 banking-router evaluate-luna-validation
@@ -116,7 +127,7 @@ banking-router evaluate-final
 
 The first command sends only the 60 validation queries to GPT-6 Luna. The second command selects thresholds using validation only and freezes them in `artifacts/hybrid_policy.json`. The final command evaluates that frozen policy on the 240-query test subset and calls Luna only for low-confidence local predictions. API responses are cached incrementally in ignored JSONL files, so an interrupted run can resume.
 
-No synthetic examples are used at any stage. GPT-6 Luna only classifies cleaned queries originating in the official BANKING77 files. The model and policy design is documented in `docs/model_design.md`.
+No synthetic examples are used at any stage. GPT-6 Luna is accessed through OpenRouter and only classifies cleaned queries originating in the official BANKING77 files. The model and policy design is documented in `docs/model_design.md`.
 
 ## Reproducibility controls
 
@@ -134,7 +145,7 @@ No synthetic examples are used at any stage. GPT-6 Luna only classifies cleaned 
 - BANKING77 is a research dataset, not live operational bank traffic.
 - The three queues are a project-specific aggregation of 12 fine-grained intents.
 - The keyword baseline is deliberately simple and is not a production rule engine.
-- GPT-6 Luna and hybrid results remain unreported until the API experiment is run with a user-owned key; the repository never fabricates missing results.
+- The measured OpenRouter and hybrid results are specific to the dated model, provider routing, fixed subset, and frozen policy; they should not be generalized to live bank traffic.
 
 ## Citation
 
