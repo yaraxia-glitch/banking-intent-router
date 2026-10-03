@@ -1,0 +1,50 @@
+{
+  "policy": {
+    "unicode_normalisation": "NFKC",
+    "whitespace": "Control characters replaced with spaces; repeated whitespace collapsed; edges trimmed",
+    "empty_rows": "Quarantined",
+    "invalid_categories": "Quarantined against official categories.json",
+    "conflicting_labels": "All conflicting normalised texts quarantined",
+    "within_split_duplicates": "First row retained; later exact normalised duplicates quarantined",
+    "cross_split_overlap": "Official test retained; matching official train rows quarantined",
+    "pii": "Email, URL, IBAN, and 7-19 digit patterns scanned and redacted when present"
+  },
+  "raw": {
+    "train_rows": 10003,
+    "test_rows": 3080,
+    "total_rows": 13083,
+    "expected_categories": 77
+  },
+  "cleaned": {
+    "train_rows": 9992,
+    "test_rows": 3079,
+    "total_rows": 13071
+  },
+  "changes": {
+    "text_normalised": 570,
+    "rows_with_pii_redacted": 0,
+    "quarantined_total": 12,
+    "quarantine_reasons": {
+      "cross_split_leakage_training_removed": 7,
+      "duplicate_within_split": 5
+    },
+    "pii_pattern_matches": {}
+  },
+  "outputs": {
+    "train_cleaned": {
+      "path": "data\\cleaned\\banking77_train_cleaned.csv",
+      "rows": 9992,
+      "sha256": "efe1a39ffa63c927cdecf94341a94430cb4c4d42d497503cca5bea1015f16fce"
+    },
+    "test_cleaned": {
+      "path": "data\\cleaned\\banking77_test_cleaned.csv",
+      "rows": 3079,
+      "sha256": "b2f6c6b61d15fa9d5c75ff0820fcd32d9652b5d14fde69943c85c5184f343ac4"
+    },
+    "quarantine": {
+      "path": "data\\cleaned\\quarantine.csv",
+      "rows": 12,
+      "sha256": "95a0796b0448ca2e619ad48f2e7924769bef56ba7628f9579ac2a746480b47cf"
+    }
+  }
+}

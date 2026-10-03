@@ -1,3 +1,5 @@
+"""Unit tests for routing metrics and review-aware evaluation."""
+
 import unittest
 
 from banking_router.evaluation import calculate_metrics
@@ -22,4 +24,3 @@ class EvaluationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -8,6 +8,18 @@ Can a hybrid router keep harmful wrong-queue assignments at or below 5% of all t
 
 The prototype does not answer customers, execute transactions, infer fraud, or process live personal data.
 
+## Quick verification with no API call
+
+The repository includes the public data snapshot, trained local artifact, cached model classifications, and final evaluation outputs used in the report. A marker or reviewer can verify the complete project without an OpenRouter key:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe scripts\verify_project.py
+```
+
+The expected final lines are `Ran 19 tests`, `OK`, and `VERIFICATION PASSED`. This command is read-only and does not spend API credit.
+
 ## Dataset
 
 The project uses the public [BANKING77 dataset](https://github.com/PolyAI-LDN/task-specific-datasets/tree/master/banking_data), which contains 13,083 English customer-service queries across 77 intents. The source repository is licensed under CC BY 4.0.
@@ -29,6 +41,17 @@ The official test examples remain separate from threshold selection and model se
 | Fees and pricing | `card_payment_fee_charged`, `cash_withdrawal_charge`, `exchange_charge`, `transfer_fee_charged` |
 
 The single source of truth for this mapping is `src/banking_router/taxonomy.py`.
+
+## Product documentation
+
+The complete product view is in [`docs/product_documentation.md`](docs/product_documentation.md). It records the persona, input and output contract, system architecture, owned and rented components, target metrics, measured results, scope, and operating controls.
+
+Supporting repository guides:
+
+- [`data/README.md`](data/README.md) explains the source, licence, cleaning lineage, schemas, split sizes, and data files.
+- [`results/README.md`](results/README.md) explains the evaluation protocol, metric definitions, and every checked-in result file.
+- [`artifacts/README.md`](artifacts/README.md) explains the trained local model and frozen hybrid policy.
+- [`docs/code_map.md`](docs/code_map.md) maps the commands and Python modules to their responsibilities.
 
 ## Setup
 
@@ -133,7 +156,7 @@ banking-router select-hybrid-policy
 banking-router evaluate-final
 ```
 
-The first command sends only the 60 validation queries to GPT-6 Luna. The second command selects thresholds using validation only and freezes them in `artifacts/hybrid_policy.json`. The final command evaluates that frozen policy on the 240-query test subset and calls Luna only for low-confidence local predictions. API responses are cached incrementally in ignored JSONL files, so an interrupted run can resume.
+The first command sends only the 60 validation queries to GPT-6 Luna. The second command selects thresholds using validation only and freezes them in `artifacts/hybrid_policy.json`. The final command evaluates that frozen policy on the 240-query test subset and calls Luna only for low-confidence local predictions. API responses are cached incrementally in JSONL files, so an interrupted run can resume. The assessed cache files are checked in as evaluation evidence; they contain only public BANKING77 queries and model classifications, never the API key.
 
 No synthetic examples are used at any stage. GPT-6 Luna is accessed through OpenRouter and only classifies cleaned queries originating in the official BANKING77 files. The model and policy design is documented in `docs/model_design.md`.
 
@@ -146,7 +169,8 @@ No synthetic examples are used at any stage. GPT-6 Luna is accessed through Open
 - The source file hashes and generated split hashes are stored in `manifest.json`.
 - The intent-to-queue map is version controlled and unit tested.
 - The same processed test file is used for every model.
-- Generated datasets, trained artifacts, API secrets, and experiment outputs are excluded from Git.
+- The exact public dataset snapshot, cleaned and processed data, trained local artifact, cached classifications, and evaluation outputs used for the submission are version controlled.
+- API secrets, `.env` files, virtual environments, and Python caches are excluded from Git.
 
 ## Current limitations
 

@@ -1,0 +1,40 @@
+{
+  "rows": 240,
+  "review_count": 8,
+  "review_rate": 0.03333333333333333,
+  "automatic_coverage": 0.9666666666666667,
+  "harmful_wrong_queue_count": 10,
+  "harmful_wrong_queue_rate": 0.041666666666666664,
+  "selective_queue_accuracy": 0.9568965517241379,
+  "raw_queue_accuracy_without_review": 0.95,
+  "queue_confusion": {
+    "disputes_and_corrections": {
+      "REVIEW": 6,
+      "disputes_and_corrections": 71,
+      "failed_and_pending_transactions": 1,
+      "fees_and_pricing": 2
+    },
+    "failed_and_pending_transactions": {
+      "REVIEW": 1,
+      "disputes_and_corrections": 1,
+      "failed_and_pending_transactions": 77,
+      "fees_and_pricing": 1
+    },
+    "fees_and_pricing": {
+      "REVIEW": 1,
+      "disputes_and_corrections": 1,
+      "failed_and_pending_transactions": 4,
+      "fees_and_pricing": 74
+    }
+  },
+  "intent_accuracy": 0.8916666666666667,
+  "api_call_count": 9,
+  "api_call_rate": 0.0375,
+  "model": "openai/gpt-6-luna",
+  "input_tokens": 4070,
+  "output_tokens": 642,
+  "estimated_standard_cost_usd": 0.000728,
+  "pricing_as_of": "2026-09-30",
+  "gateway": "openrouter",
+  "policy_path": "artifacts\\hybrid_policy.json"
+}

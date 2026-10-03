@@ -1,3 +1,5 @@
+"""Unit tests for structured GPT-6 Luna routing through OpenRouter."""
+
 import json
 import unittest
 from types import SimpleNamespace

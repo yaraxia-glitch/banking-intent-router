@@ -1,0 +1,241 @@
+text,intent,queue,source_split
+"I have a direct debit transaction I have not set up, but would like to .",direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+I have no idea why my card payment did not work.,declined_card_payment,failed_and_pending_transactions,official_test
+I don't recall making that payment?,card_payment_not_recognised,disputes_and_corrections,official_test
+"I show another charge on my card from when I used it, why?",card_payment_fee_charged,fees_and_pricing,official_test
+Why has my transfer failed?,failed_transfer,failed_and_pending_transactions,official_test
+My payment still hasn't processed!,pending_card_payment,failed_and_pending_transactions,official_test
+I see that I have been charged multiple times for the same transaction.,transaction_charged_twice,disputes_and_corrections,official_test
+I don't recognise a cash withdrawal,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+Tell me why my transfer failed!,failed_transfer,failed_and_pending_transactions,official_test
+The transfer is coming up as pending the payment is due today. Will I be charged a fee?,pending_transfer,failed_and_pending_transactions,official_test
+How long do card transactions take to clear?,pending_card_payment,failed_and_pending_transactions,official_test
+I made a payment that got charged twice instead of once.,transaction_charged_twice,disputes_and_corrections,official_test
+Is there a transfer fee?,transfer_fee_charged,fees_and_pricing,official_test
+I understand that this is extremely late. After going over my transactions for the last couple of months I noticed a large charge that I'm sure I did not make. Is there anyway I can still dispute this?,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+I've been charged more than once for the same transaction,transaction_charged_twice,disputes_and_corrections,official_test
+I didn't make this direct debit transaction,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+"I thought transfers were free, why was I charged a fee?",transfer_fee_charged,fees_and_pricing,official_test
+"More than one time this week, I have been charged more than once for the same transaction. Please correct the issue and refund the duplicate charges.",transaction_charged_twice,disputes_and_corrections,official_test
+Why have I been charged twice for the same transaction?,transaction_charged_twice,disputes_and_corrections,official_test
+How long will this card payment stay pending?,pending_card_payment,failed_and_pending_transactions,official_test
+A fee was charged for my recent withdrawal.,cash_withdrawal_charge,fees_and_pricing,official_test
+Think someone has took money out with my card. What shall I do?,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+"Hi, Please help me, as i have transferred some amount but receiver did not get the same amount. He received a bit less. Due to this again i need to transfer the difference. I have transferred money but beneficiary's account is credited with less amount. Now i have transfer the difference of the amount. I think there is some issue, could you please look into this.",transfer_fee_charged,fees_and_pricing,official_test
+What is the payment in my account that I did not do?,card_payment_not_recognised,disputes_and_corrections,official_test
+Is there a limit on how much I can withdraw from my account without being charged?,cash_withdrawal_charge,fees_and_pricing,official_test
+When will the transfer go through?,pending_transfer,failed_and_pending_transactions,official_test
+I have a strange direct debit in my statement,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+Using an ATM caused me to incur an additional fee. Why?,cash_withdrawal_charge,fees_and_pricing,official_test
+Someone has taken my money and I don't know who,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+Please explain why the transfers shows up as pending?,pending_transfer,failed_and_pending_transactions,official_test
+I made a card payment and a fee is showing up?,card_payment_fee_charged,fees_and_pricing,official_test
+My card has been charged two separate times for a single transaction.,transaction_charged_twice,disputes_and_corrections,official_test
+"It looks like someone else withdrew cash from my account, can you help?",cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+There is a payment in the App that is not mine.,card_payment_not_recognised,disputes_and_corrections,official_test
+Why did I have to pay more when I do it with my card?,card_payment_fee_charged,fees_and_pricing,official_test
+I was wondering if there were any discounts offered for frequent currency exchanges?,exchange_charge,fees_and_pricing,official_test
+My transfer is still pending and I know the account numbers are correct. Please help.,pending_transfer,failed_and_pending_transactions,official_test
+I am seeing pending from the card payment I made.,pending_card_payment,failed_and_pending_transactions,official_test
+What is the base amount for cross-currency exchanges?,exchange_charge,fees_and_pricing,official_test
+My card was declined in a shop,declined_card_payment,failed_and_pending_transactions,official_test
+I have never been charged a fee for cash withdrawal before. When did that change?,cash_withdrawal_charge,fees_and_pricing,official_test
+Why was I charged a fee when I paid with card?,card_payment_fee_charged,fees_and_pricing,official_test
+Why did I have to pay extra because I paid with card?,card_payment_fee_charged,fees_and_pricing,official_test
+Explain what the pending payment means?,pending_card_payment,failed_and_pending_transactions,official_test
+Why are you declining my payment? Everything was fine.,declined_card_payment,failed_and_pending_transactions,official_test
+What is stopping my money from transferring?,failed_transfer,failed_and_pending_transactions,official_test
+I did not make this card payment.,card_payment_not_recognised,disputes_and_corrections,official_test
+There are some strange charges on my card that I didn't make from a few days ago. Is my card stolen and if so should I cancel it? Will I get refunded the charges?,card_payment_not_recognised,disputes_and_corrections,official_test
+I transferred money and was charged and want to know why.,transfer_fee_charged,fees_and_pricing,official_test
+I have a duplicate payment showing,transaction_charged_twice,disputes_and_corrections,official_test
+What are your policies for card transfers?,failed_transfer,failed_and_pending_transactions,official_test
+Why is my transfer not done yet?,pending_transfer,failed_and_pending_transactions,official_test
+How long does a transfer take to be confirmed?,pending_transfer,failed_and_pending_transactions,official_test
+whats the exchange charge,exchange_charge,fees_and_pricing,official_test
+Somebody used my card to make a purchase,card_payment_not_recognised,disputes_and_corrections,official_test
+Is there a fee when you pay with your card?,card_payment_fee_charged,fees_and_pricing,official_test
+Why did my transfer fail?,failed_transfer,failed_and_pending_transactions,official_test
+Why is a payment showing up on my card as pending?,pending_card_payment,failed_and_pending_transactions,official_test
+"More fees, this time for withdrawing my own cash. Why are you robbing me?",cash_withdrawal_charge,fees_and_pricing,official_test
+What extra charges are there?,transfer_fee_charged,fees_and_pricing,official_test
+Why is there a direct debit payment on my app that is not from me?,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+A cash withdrawal is showing up that I didn't do.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+how come my transfer didn't work,failed_transfer,failed_and_pending_transactions,official_test
+What is the fee charged with this card payment?,card_payment_fee_charged,fees_and_pricing,official_test
+"My card was rejected at the store for some reason, can you look into this for me?",declined_card_payment,failed_and_pending_transactions,official_test
+"I was out today looking forward to pay with my new card, turns out the payment just kept getting declined. This is really sad, what's going on?",declined_card_payment,failed_and_pending_transactions,official_test
+Where do I find the exchange rate?,exchange_charge,fees_and_pricing,official_test
+I have a transfer that's pending and wanted to know how long it is going to take to process?,pending_transfer,failed_and_pending_transactions,official_test
+Is there a reason I was charged a fee for using my card as payment? I've never had an extra fee before.,card_payment_fee_charged,fees_and_pricing,official_test
+"Fix your system. I can't make transfers, I've tried like 5 times already.",failed_transfer,failed_and_pending_transactions,official_test
+Why was my card payment declined?,declined_card_payment,failed_and_pending_transactions,official_test
+Will I be charged a fee for exchanging foreign currencies?,exchange_charge,fees_and_pricing,official_test
+When would my card be charged an extra fee for a transaction?,card_payment_fee_charged,fees_and_pricing,official_test
+There's a debit on my account that I didn't do.,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+Pending transfer?,pending_transfer,failed_and_pending_transactions,official_test
+Some of my card payments look different than where I purchased products from. Why is that?,card_payment_not_recognised,disputes_and_corrections,official_test
+Can you explain why there is a payment showing twice?,transaction_charged_twice,disputes_and_corrections,official_test
+Transactions on my card look really weird. I've been charged twice for a couple things this week! Please check this and return the double charged ones.,transaction_charged_twice,disputes_and_corrections,official_test
+Some cash is showing up in my app that I did not get.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+My transfer will not go through.,failed_transfer,failed_and_pending_transactions,official_test
+My card payment is pending.,pending_card_payment,failed_and_pending_transactions,official_test
+I was charged extra for a withdrawal,cash_withdrawal_charge,fees_and_pricing,official_test
+Why was I charged an extra fee when using a card?,card_payment_fee_charged,fees_and_pricing,official_test
+i think someone is using my card to withdraw money. Someone stole my wallet. What can I do? it is urgent.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+I made this payment days ago so why hasn't it gone through yet?,pending_card_payment,failed_and_pending_transactions,official_test
+Are there any extra hidden fees for exchanging currencies?,exchange_charge,fees_and_pricing,official_test
+Card payment declined?,declined_card_payment,failed_and_pending_transactions,official_test
+An ATM fee was attached to my recent withdrawal.,cash_withdrawal_charge,fees_and_pricing,official_test
+Why am I being charged twice?,transaction_charged_twice,disputes_and_corrections,official_test
+I made a purchase and it says it's pending. What does that mean?,pending_card_payment,failed_and_pending_transactions,official_test
+"When I got cash, I'm pretty sure there was a glitch that overcharged me.",cash_withdrawal_charge,fees_and_pricing,official_test
+Why was I charged a fee for a transfer?,transfer_fee_charged,fees_and_pricing,official_test
+My card didn't work in one of the shops.,declined_card_payment,failed_and_pending_transactions,official_test
+I had made a transfer but its still pending.,pending_transfer,failed_and_pending_transactions,official_test
+"I have a card payment that was declined, but why?",declined_card_payment,failed_and_pending_transactions,official_test
+Help me. There is a Direct Debit that I didn't make.,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+I am concerned about the security in my account and would like to make a dispute.,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+I have an unauthorized transaction on my statement,card_payment_not_recognised,disputes_and_corrections,official_test
+There's a direct debit on my account that I didn't authorize,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+Why did my transfer not go through?,failed_transfer,failed_and_pending_transactions,official_test
+My card payment is still pending.,pending_card_payment,failed_and_pending_transactions,official_test
+"I sent out money, but was charged extra for transferring. Why?",transfer_fee_charged,fees_and_pricing,official_test
+Can you provide a reason as to why my transfer did not work?,failed_transfer,failed_and_pending_transactions,official_test
+My app shows some cash I didn't get.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+I don't recognise a card payment,card_payment_not_recognised,disputes_and_corrections,official_test
+"Even though it's late, I wanted to see about disputing a charge. I was just looking through my transactions over the past couple of months and noticed a pretty large amount that was not completed by me. Is this possibly something I can still do.",direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+I have a pending payment from stuff I bought this morning.,pending_card_payment,failed_and_pending_transactions,official_test
+I could not get my transfer to happen correctly and was wondering why?,failed_transfer,failed_and_pending_transactions,official_test
+I'm not familiar with a card payment.,card_payment_not_recognised,disputes_and_corrections,official_test
+Why do you charge fees on card payments?,card_payment_fee_charged,fees_and_pricing,official_test
+Why were there additional charges when transferring?,transfer_fee_charged,fees_and_pricing,official_test
+"I can not seem to make a successful transfer, can you tell me what I'm doing wrong?",failed_transfer,failed_and_pending_transactions,official_test
+Why was a charged just for transferring?,transfer_fee_charged,fees_and_pricing,official_test
+Is there a fee to exchange foreign money?,exchange_charge,fees_and_pricing,official_test
+How long does it take for a payment to go thru? I made one a few days ago and it has not been cleared yet.,pending_card_payment,failed_and_pending_transactions,official_test
+I payed with a card and was charged an extra fee,card_payment_fee_charged,fees_and_pricing,official_test
+"I've notice I was charged for withdrawing cash, can you explain why?",cash_withdrawal_charge,fees_and_pricing,official_test
+My account has a weird withdrawal.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+There's a cash withdraw on my statement that I didn't make.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+There is a suspicious cash withdraw on the account.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+They declined my card payment.,declined_card_payment,failed_and_pending_transactions,official_test
+"While I was checking out in the grocery store, I realized I needed cash so I requested some. However, I noticed there was a fee for this transaction. Why did I get charged a fee?",cash_withdrawal_charge,fees_and_pricing,official_test
+I'm not sure why I was charged an extra fee for transferring funds.,transfer_fee_charged,fees_and_pricing,official_test
+What is the reason for this fee I got after a simple cash withdrawal?,cash_withdrawal_charge,fees_and_pricing,official_test
+What is the cause that the transfer shows as pending?,pending_transfer,failed_and_pending_transactions,official_test
+How much do I have to pay for the exchange fee?,exchange_charge,fees_and_pricing,official_test
+Why did you charge me for a cash withdrawal?,cash_withdrawal_charge,fees_and_pricing,official_test
+How come I was charged extra when I withdrew cash?,cash_withdrawal_charge,fees_and_pricing,official_test
+Something is wrong with my payment account since it has been declined,declined_card_payment,failed_and_pending_transactions,official_test
+"I double checked that I have the correct account details , they're right for sure. Transfer is still pending since forever. What should be done now?",pending_transfer,failed_and_pending_transactions,official_test
+"I recently got a new place while I'm staying abroad and have been using this account to manage payments, but suddenly I am seeing fees increase. Where are these additional fees coming from?",transfer_fee_charged,fees_and_pricing,official_test
+What is the maximum I can transfer before I incur fees?,transfer_fee_charged,fees_and_pricing,official_test
+Is there supposed to be a fee for the transfer I made?,transfer_fee_charged,fees_and_pricing,official_test
+Would I be charged for exchanging currencies?,exchange_charge,fees_and_pricing,official_test
+How long does an item I bought show as pending?,pending_card_payment,failed_and_pending_transactions,official_test
+Why do you keep declining my payment? I tried several times already with this card and it's just not working,declined_card_payment,failed_and_pending_transactions,official_test
+My transfer didn't work,failed_transfer,failed_and_pending_transactions,official_test
+There is an ATM withdrawl in the app I don't recognize.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+im not paying this transfer fee,transfer_fee_charged,fees_and_pricing,official_test
+Why am I being charged twice fro a restaurant?,transaction_charged_twice,disputes_and_corrections,official_test
+Why would I have a pending payment?,pending_card_payment,failed_and_pending_transactions,official_test
+My app says that I received cash from an ATM and I didn't.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+"My card payment is still on hold, why is it so?",pending_card_payment,failed_and_pending_transactions,official_test
+Was charged an ATM fee despite it being a small withdrawal on the 1st day of the month. I thought I was allowed 200 per month?,cash_withdrawal_charge,fees_and_pricing,official_test
+"I am seeing a weird payment showing up that I know I did not make, how can I get it cancelled?",direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+"My account got charged for taking out cash, why did this happen?",cash_withdrawal_charge,fees_and_pricing,official_test
+Why was I charged multiple times for the same thing?,transaction_charged_twice,disputes_and_corrections,official_test
+what does pending mean?,pending_card_payment,failed_and_pending_transactions,official_test
+How much will I pay to exchange foreign currency?,exchange_charge,fees_and_pricing,official_test
+"I have waited 15 days, but my payment still hasn't cleared.",pending_card_payment,failed_and_pending_transactions,official_test
+"I didn't get cash from an ATM, but the app says I did",cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+Weird charges are appearing in my debit account.,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+There is a fee on my account. Why?,card_payment_fee_charged,fees_and_pricing,official_test
+Why is there an extra charge for money that was withdrawn?,cash_withdrawal_charge,fees_and_pricing,official_test
+There is a fraudulent charge on my statement.,card_payment_not_recognised,disputes_and_corrections,official_test
+How do you fix my card payment?,declined_card_payment,failed_and_pending_transactions,official_test
+Unknown direct deposit,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+I was trying to purchase something at the store today and my card has been declined. Why has this happened?,declined_card_payment,failed_and_pending_transactions,official_test
+How long does it take for a money transfer to show?,pending_transfer,failed_and_pending_transactions,official_test
+Why has my payment not gone through?,pending_card_payment,failed_and_pending_transactions,official_test
+Does it cost money for currency exchange services?,exchange_charge,fees_and_pricing,official_test
+In my statement there is a payment that is I do not recognize,card_payment_not_recognised,disputes_and_corrections,official_test
+How can I speed up a transfer? Mine is pending.,pending_transfer,failed_and_pending_transactions,official_test
+How much does it cost to exchange currencies?,exchange_charge,fees_and_pricing,official_test
+I noticed after looking over my transactions that I have been charged twice from an earlier restaurant visit this week. Is it possible that one of these can be removed so I get the money back for the one that is not accurate?,transaction_charged_twice,disputes_and_corrections,official_test
+"Hi, I'm buying a flat and I'm trying to get my mortgage to go though. Every time I check I simply get an error message. Is there any way you can help me get this money transferred over. Thanks!",failed_transfer,failed_and_pending_transactions,official_test
+Why is my debit card being declined when I have money?,declined_card_payment,failed_and_pending_transactions,official_test
+They charged me for paying with my card.,card_payment_fee_charged,fees_and_pricing,official_test
+It looks like I was charged a withdrawal fee for going to my ATM. Why is that because I haven't been charged previously for doing so?,cash_withdrawal_charge,fees_and_pricing,official_test
+Why is there more then one charge on my card I only paid for one not twice how can I fix this?,transaction_charged_twice,disputes_and_corrections,official_test
+Why am I being charged when I withdraw cash?,cash_withdrawal_charge,fees_and_pricing,official_test
+Paying in card resulted in a fee,card_payment_fee_charged,fees_and_pricing,official_test
+Why is there a transaction that shows multiple times?,transaction_charged_twice,disputes_and_corrections,official_test
+Is using my card free?,card_payment_fee_charged,fees_and_pricing,official_test
+I don't know where this transaction came from?,card_payment_not_recognised,disputes_and_corrections,official_test
+I was charged for a cash withdrawal.,cash_withdrawal_charge,fees_and_pricing,official_test
+"Please put a freeze on my card, I am worried there has been some payments on it and I don't know what for.",card_payment_not_recognised,disputes_and_corrections,official_test
+I have a pending transfer,pending_transfer,failed_and_pending_transactions,official_test
+Please check payments on my card. There is a duplicate and I only bought it once.,transaction_charged_twice,disputes_and_corrections,official_test
+"How come you charge for cash withdrawals? I withdrew cash after buying groceries today, and there seems to be a new fee",cash_withdrawal_charge,fees_and_pricing,official_test
+This Direct Debit payment may not be right.,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+There's a Direct Debit payment in my account that I didn't make,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+There is a strange payment on my statement. What should I do?,card_payment_not_recognised,disputes_and_corrections,official_test
+The new card that was just sent to me was declined multiple times yesterday when I tried to use it at a restaurant to pay for my dinner. I am really disappointed and embarrassed that my card was denied when I tried to use it to pay for my friend's birthday dinner.,declined_card_payment,failed_and_pending_transactions,official_test
+Why would there be a payment on my account I don't recognize?,card_payment_not_recognised,disputes_and_corrections,official_test
+I made a transfer 12 hours ago. Why is it still listed as pending?,pending_transfer,failed_and_pending_transactions,official_test
+I used my card for a purchase and was charged a fee,card_payment_fee_charged,fees_and_pricing,official_test
+I would appreciate that someone let me know when there is an extra charge for payments. I was checking the app earlier and saying a charge on one of my payments that was additional that no one made me aware of before.,card_payment_fee_charged,fees_and_pricing,official_test
+What are my remedies if I think I was charged twice for the same expense?,transaction_charged_twice,disputes_and_corrections,official_test
+Is there a discount for frequently exchanging currencies?,exchange_charge,fees_and_pricing,official_test
+There is a odd withdrawal on my account.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+My attempted transfer failed.,failed_transfer,failed_and_pending_transactions,official_test
+Hello. I checked my transactions and saw I was double charged on my card for a restaurant visit. I would like to get my money back.,transaction_charged_twice,disputes_and_corrections,official_test
+Why are there fees for card usage?,card_payment_fee_charged,fees_and_pricing,official_test
+Is there a reason I was charged a fee to transfer?,transfer_fee_charged,fees_and_pricing,official_test
+There is a suspicious direct debit payment.,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+someone stole my money,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+"I'm concerned about a payment that has recently been made on my card. I do not recognize the name that the transaction went to, can you help me?",card_payment_not_recognised,disputes_and_corrections,official_test
+Is there an exchange fee?,exchange_charge,fees_and_pricing,official_test
+Can I exchange money from abroad without additional costs?,exchange_charge,fees_and_pricing,official_test
+I have a payment I didn't do,card_payment_not_recognised,disputes_and_corrections,official_test
+Why was a charged a fee for using the card?,card_payment_fee_charged,fees_and_pricing,official_test
+If I need to exchange currency is there an extra fee?,exchange_charge,fees_and_pricing,official_test
+"Hello, I am facing the issue with my new card as payments are declining again and again. Please help me in this issue.",declined_card_payment,failed_and_pending_transactions,official_test
+Why is a money transfer not showing?,pending_transfer,failed_and_pending_transactions,official_test
+How long does a transfer stay pending?,pending_transfer,failed_and_pending_transactions,official_test
+I am still waiting for a money transfer to show,pending_transfer,failed_and_pending_transactions,official_test
+What are your currency exchange fees?,exchange_charge,fees_and_pricing,official_test
+"The transfer keeps failing , I tried to transfer some money to friends this morning but it keeps getting rejected for some reason, Would you please check the issue ?",failed_transfer,failed_and_pending_transactions,official_test
+There is a direct debit I do not recognise in my statement,direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+"Why did I get charged for something I bought online? Even though it was international, I thought it would be covered.",transfer_fee_charged,fees_and_pricing,official_test
+Does it cost anything for exchanges?,exchange_charge,fees_and_pricing,official_test
+Why is there a pending transaction on my card?,pending_card_payment,failed_and_pending_transactions,official_test
+What should I do if I see a payment I didn't make?,card_payment_not_recognised,disputes_and_corrections,official_test
+Why am I seeing a transfer fee?,transfer_fee_charged,fees_and_pricing,official_test
+I am seeing in the App a some cash withdrawal that its not mine,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+Why was there a fee for my transfer?,transfer_fee_charged,fees_and_pricing,official_test
+My card declined,declined_card_payment,failed_and_pending_transactions,official_test
+In the past month I often used this account to manage payments for my new holiday villa. Now all of a sudden your fees have increased exorbitantly! Don't you have a rewards programme for frequent users?,transfer_fee_charged,fees_and_pricing,official_test
+Is there a charge for a foreign currency exchange?,exchange_charge,fees_and_pricing,official_test
+Says my transfer can't be completed?,failed_transfer,failed_and_pending_transactions,official_test
+The app made a mistake and said I made a cash withdrawal.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+"I recently made a payment, and it is showing up in my account as ""pending"". What does that mean?",pending_card_payment,failed_and_pending_transactions,official_test
+Why was I not able to complete a transfer?,failed_transfer,failed_and_pending_transactions,official_test
+I saw a payment i did not do,card_payment_not_recognised,disputes_and_corrections,official_test
+"im so mad right now. theres several charges that I think my x boyfriend made on my card. the companys on the website wouldn't refund me my money, they told me to contact my bank. DO something please.",direct_debit_payment_not_recognised,disputes_and_corrections,official_test
+Help! My wallet was stolen and someone is taking money out. I need this money! What can I do?,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+I have multiple charges on the same transaction.,transaction_charged_twice,disputes_and_corrections,official_test
+I'm unsure of a withdrawl in my statement.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+I tried to make a transfer but it failed,failed_transfer,failed_and_pending_transactions,official_test
+I don't know why my payment didn't work.,declined_card_payment,failed_and_pending_transactions,official_test
+When will the transfer be completed?,pending_transfer,failed_and_pending_transactions,official_test
+I am confused as to why my transfer could still be pending.,pending_transfer,failed_and_pending_transactions,official_test
+My transfer didn't go through.,failed_transfer,failed_and_pending_transactions,official_test
+There is a withdrawal that isn't mind in the app.,cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+"There is an error, the app says I made an ATM withdrawal and I didn't.",cash_withdrawal_not_recognised,disputes_and_corrections,official_test
+My card was not accepted.,declined_card_payment,failed_and_pending_transactions,official_test
+I was charged a fee for my transfer.,transfer_fee_charged,fees_and_pricing,official_test
+whats your exchange rate,exchange_charge,fees_and_pricing,official_test
+Can you please check if I was charged twice?,transaction_charged_twice,disputes_and_corrections,official_test

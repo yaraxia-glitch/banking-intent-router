@@ -1,0 +1,31 @@
+{
+  "rows": 60,
+  "review_count": 22,
+  "review_rate": 0.36666666666666664,
+  "automatic_coverage": 0.6333333333333333,
+  "harmful_wrong_queue_count": 0,
+  "harmful_wrong_queue_rate": 0.0,
+  "selective_queue_accuracy": 1.0,
+  "raw_queue_accuracy_without_review": 0.6333333333333333,
+  "queue_confusion": {
+    "disputes_and_corrections": {
+      "REVIEW": 8,
+      "disputes_and_corrections": 12
+    },
+    "failed_and_pending_transactions": {
+      "REVIEW": 2,
+      "failed_and_pending_transactions": 18
+    },
+    "fees_and_pricing": {
+      "REVIEW": 12,
+      "fees_and_pricing": 8
+    }
+  },
+  "intent_accuracy": 0.6333333333333333,
+  "model": "openai/gpt-6-luna",
+  "input_tokens": 26474,
+  "output_tokens": 3343,
+  "estimated_standard_cost_usd": 0.0043189,
+  "pricing_as_of": "2026-09-30",
+  "gateway": "openrouter"
+}

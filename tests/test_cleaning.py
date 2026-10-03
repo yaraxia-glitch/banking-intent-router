@@ -1,3 +1,5 @@
+"""Unit tests for text normalisation, PII handling, and cleaning audits."""
+
 import unittest
 
 from banking_router.cleaning import RawRow, clean_rows, normalise_text, redact_pii
@@ -45,4 +47,3 @@ class CleaningTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

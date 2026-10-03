@@ -1,0 +1,13 @@
+source_split,source_row_number,category,text,reason,details
+official_train,1292,card_not_working,I can't seem to be able to use my card,duplicate_within_split,A previous row in the same source split has identical normalised text and category
+official_train,1726,pin_blocked,I put the wrong pin too many times and now it is blocked. Can you help me unblock it?,duplicate_within_split,A previous row in the same source split has identical normalised text and category
+official_train,4597,atm_support,Where can I withdraw money from?,duplicate_within_split,A previous row in the same source split has identical normalised text and category
+official_train,6967,change_pin,Do I need to go to a physical bank to change my PIN?,duplicate_within_split,A previous row in the same source split has identical normalised text and category
+official_test,1463,atm_support,Which ATMs accept this card?,duplicate_within_split,A previous row in the same source split has identical normalised text and category
+official_train,1724,pin_blocked,How do I unblock my PIN?,cross_split_leakage_training_removed,Normalised text also appears in official_test; test is preserved and train is removed
+official_train,3105,card_acceptance,What businesses accept this card?,cross_split_leakage_training_removed,Normalised text also appears in official_test; test is preserved and train is removed
+official_train,3118,card_acceptance,Where can I use my card?,cross_split_leakage_training_removed,Normalised text also appears in official_test; test is preserved and train is removed
+official_train,4478,compromised_card,"There are a few transaction that I don't recognize, I think someone managed to get my card details and use it.",cross_split_leakage_training_removed,Normalised text also appears in official_test; test is preserved and train is removed
+official_train,4578,atm_support,At which ATMs can I use this card?,cross_split_leakage_training_removed,Normalised text also appears in official_test; test is preserved and train is removed
+official_train,6986,change_pin,Which cash machines will allow me to change my PIN?,cross_split_leakage_training_removed,Normalised text also appears in official_test; test is preserved and train is removed
+official_train,9923,country_support,I don't live in the UK. Can I still get a card?,cross_split_leakage_training_removed,Normalised text also appears in official_test; test is preserved and train is removed

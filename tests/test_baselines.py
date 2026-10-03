@@ -1,3 +1,5 @@
+"""Unit tests for the majority, keyword, and TF-IDF routing baselines."""
+
 import unittest
 
 from banking_router.baselines import KeywordRuleRouter, MajorityQueueRouter, TfidfIntentRouter
@@ -53,4 +55,3 @@ class BaselineTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

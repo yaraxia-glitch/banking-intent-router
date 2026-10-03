@@ -1,3 +1,5 @@
+"""Unit tests for the version-controlled intent-to-queue taxonomy."""
+
 import unittest
 
 from banking_router.taxonomy import INTENT_TO_QUEUE, QUEUE_TO_INTENTS, validate_taxonomy
@@ -17,4 +19,3 @@ class TaxonomyTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

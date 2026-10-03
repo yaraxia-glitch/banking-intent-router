@@ -31,6 +31,6 @@ When the local and Luna queue predictions disagree below the local threshold, th
 
 - API results are appended to JSONL after each call, so interrupted runs resume without paying for completed rows again.
 - The university-provided key is read from `OPENROUTER_API_KEY`, with `OPENAI_API_KEY` accepted only as a compatibility fallback. The key is never stored in the repository.
-- Generated result caches, trained artifacts, and secrets are excluded from Git.
+- The assessed public-data snapshot, result caches, and trained local artifact are checked in so the submitted evaluation can be inspected without an API call. Secrets and `.env` files remain excluded from Git.
 - Token counts and a dated cost estimate are written to the metrics files.
 - The final test command refuses to run until a validation-selected policy exists.

@@ -1,3 +1,5 @@
+"""Unit tests for deterministic sampling and split isolation."""
+
 import unittest
 from collections import Counter
 
@@ -52,4 +54,3 @@ class DataTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

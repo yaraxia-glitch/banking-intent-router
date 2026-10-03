@@ -1,3 +1,5 @@
+"""Unit tests for threshold selection and hybrid routing decisions."""
+
 import unittest
 
 from banking_router.data import DatasetRow
