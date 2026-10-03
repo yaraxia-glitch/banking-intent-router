@@ -8,6 +8,7 @@ This map explains the repository at file and module level so a reviewer can scan
 | --- | --- |
 | `scripts/prepare_banking77.py` | Run download, cleaning, audit, and deterministic sampling in one command |
 | `scripts/verify_project.py` | Perform the read-only end-to-end evidence and test verification used in the demo |
+| `scripts/demo_summary.py` | Print a concise offline summary of final metrics and one reviewed example for the recording |
 | `src/banking_router/__main__.py` | Start the `banking-router` command-line interface |
 | `src/banking_router/cli.py` | Define the data, local evaluation, Luna validation, policy selection, and final evaluation commands |
 

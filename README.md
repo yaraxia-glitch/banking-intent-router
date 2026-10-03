@@ -20,6 +20,14 @@ python -m venv .venv
 
 The expected final lines are `Ran 19 tests`, `OK`, and `VERIFICATION PASSED`. This command is read-only and does not spend API credit.
 
+For a concise recorded-demo view of the final metrics and one reviewed example, run:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\demo_summary.py
+```
+
+This second command also reads only checked-in files and makes no network or API call.
+
 ## Dataset
 
 The project uses the public [BANKING77 dataset](https://github.com/PolyAI-LDN/task-specific-datasets/tree/master/banking_data), which contains 13,083 English customer-service queries across 77 intents. The source repository is licensed under CC BY 4.0.

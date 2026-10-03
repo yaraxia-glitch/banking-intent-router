@@ -52,3 +52,11 @@ python scripts/verify_project.py
 ```
 
 The command validates hashes, row counts, split isolation, cache counts, the frozen policy, final constraints, secret hygiene, and all automated tests. It reads the checked-in evidence and makes no network or OpenRouter call.
+
+For a short human-readable view suitable for the recorded demo, run:
+
+```powershell
+python scripts/demo_summary.py
+```
+
+It prints the target and reached metrics plus one reviewed public-dataset example. It also makes no network or API call.
